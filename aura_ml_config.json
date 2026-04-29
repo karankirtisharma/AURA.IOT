@@ -1,0 +1,40 @@
+{
+    "model_type": "Isolation Forest",
+    "contamination": 0.05,
+    "feature_order": [
+        "temp",
+        "humidity",
+        "accel_x",
+        "accel_y",
+        "accel_z"
+    ],
+    "scaling": {
+        "center": [
+            31.125,
+            37.765,
+            3.1,
+            0.485,
+            9.22
+        ],
+        "scale": [
+            0.6199999999999974,
+            2.2724999999999937,
+            0.6099999999999999,
+            1.48,
+            0.22000000000000064
+        ],
+        "features": [
+            "temp",
+            "humidity",
+            "accel_x",
+            "accel_y",
+            "accel_z"
+        ]
+    },
+    "threshold": -0.57312243320785,
+    "metadata": {
+        "version": "2.4.0",
+        "engine": "Aura.IoT Intelligence Core",
+        "exported_at": "2026-04-22 06:11:41"
+    }
+}

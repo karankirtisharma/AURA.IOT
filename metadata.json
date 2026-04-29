@@ -1,0 +1,6 @@
+{
+  "name": "Shared AURA IOT",
+  "description": "A cinematic, AI-powered IoT dashboard featuring real-time telemetry, advanced 3D accelerometer visualization, and aesthetic environment luminosity monitoring.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
