@@ -1,0 +1,24 @@
+# Python files
+*.py
+*.pkl
+*.h5
+*.csv
+model_server.py
+inspect_model.py
+model_artifacts.pkl
+lstm_autoencoder_iot.h5
+authentic_iot_sensor_data.csv
+aura_ml_config.json
+metadata.json
+
+# Scripts
+*.sh
+*.bat
+run_aura_iot.sh
+run_aura_iot.bat
+
+# Config
+Procfile
+.env
+.env.local
+.env.*.local
