@@ -16,6 +16,7 @@ async function startServer() {
   let sensorDataCache: any[] = [];
   let isModelReady = false;
   let mlThreshold = 0.0204; // updated from ML server after scoring
+  const PYTHON_ML_URL = (process.env.PYTHON_ML_URL || 'http://127.0.0.1:5000').replace(/\/$/, '');
 
   // ---------------------------------------------------------------------------
   // Parse CSV and batch-send to Python ML server for scoring
@@ -60,21 +61,21 @@ async function startServer() {
       const MAX_RETRIES = 10;
       for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
         try {
-          mlResponse = await fetch('http://127.0.0.1:5000/predict', {
+          mlResponse = await fetch(`${PYTHON_ML_URL}/predict`, {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({ features })
           });
           if (mlResponse.ok) break;
-          console.warn(`[ML] Attempt ${attempt}/${MAX_RETRIES}: server returned ${mlResponse.status}`);
+          console.warn(`[ML] Attempt ${attempt}/${MAX_RETRIES} to ${PYTHON_ML_URL}: server returned ${mlResponse.status}`);
         } catch (err) {
-          console.warn(`[ML] Attempt ${attempt}/${MAX_RETRIES}: connection failed — retrying in 3s...`);
+          console.warn(`[ML] Attempt ${attempt}/${MAX_RETRIES} to ${PYTHON_ML_URL}: connection failed — retrying in 3s...`);
         }
         await new Promise(r => setTimeout(r, 3000));
       }
 
       if (!mlResponse || !mlResponse.ok) {
-        throw new Error('Could not reach ML server after retries');
+        throw new Error(`Could not reach ML server at ${PYTHON_ML_URL} after ${MAX_RETRIES} retries`);
       }
 
       const modelData: { anomaly_scores: number[]; threshold: number } =
